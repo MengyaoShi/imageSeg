@@ -24,7 +24,13 @@ imginfo = dict()
 for imageid in filelist:
     thisimgpath = os.path.join(imagepath, imageid, 'images')
     img = imageio.imread(os.path.join(thisimgpath, os.listdir(thisimgpath)[0]))
-    imginfo[imageid] = {'size': img.shape, 'roi': []}
+    imginfo[imageid] = {'size': img.shape, 
+                        'boxes': [], 
+                        'gt_classes': [],
+                        'gt_ishard': [],
+                        'gt_overlaps': [],
+                        'flipped': False,
+                        'seg_areas': []}
 
 with open(csvpath, 'r') as f:
     reader = csv.reader(f)
@@ -52,7 +58,11 @@ with open(csvpath, 'r') as f:
             ymin = min(ptlisty)
             ymax = max(ptlisty)
             roi = [xmin, ymin, xmax, ymax]
-            imginfo[imageid]['roi'].append(roi)
+            imginfo[imageid]['boxes'].append(roi)
+            imginfo[imageid]['gt_classes'].append(1)
+            imginfo[imageid]['gt_ishard'].append(False)
+            imginfo[imageid]['gt_overlaps'].append(1.0)
+            imginfo[imageid]['seg_areas'].append((xmax - xmin + 1) * (ymax - ymin + 1))
 
 f = open(os.path.join(datapath, 'stage1_train_labels_pickle.txt'), 'wb')
 pickle.dump(imginfo, f)

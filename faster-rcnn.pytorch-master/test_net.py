@@ -99,6 +99,15 @@ weight_decay = cfg.TRAIN.WEIGHT_DECAY
 if __name__ == '__main__':
 
   args = parse_args()
+  
+  args.dataset = 'pascal_voc'
+  args.cuda = True
+  args.net = 'vgg16'
+  args.checksession = 1
+  args.checkepoch = 19
+  args.checkpoint = 10021
+  args.load_dir = 'save'
+  args.vis = True
 
   print('Called with args:')
   print(args)
@@ -308,14 +317,17 @@ if __name__ == '__main__':
 
       misc_toc = time.time()
       nms_time = misc_toc - misc_tic
-
+      
       sys.stdout.write('im_detect: {:d}/{:d} {:.3f}s {:.3f}s   \r' \
           .format(i + 1, num_images, detect_time, nms_time))
       sys.stdout.flush()
 
       if vis:
-          cv2.imwrite('result.png', im2show)
-          pdb.set_trace()
+          #cv2.imwrite('result.png', im2show)
+          p = imdb.image_path_at(i).split('/')[-1]
+          p = p.split('.')[0]
+          cv2.imwrite(os.path.join(output_dir, 'images', '{}.png'.format(p)), im2show)
+          #pdb.set_trace()
           #cv2.imshow('test', im2show)
           #cv2.waitKey(0)
 
