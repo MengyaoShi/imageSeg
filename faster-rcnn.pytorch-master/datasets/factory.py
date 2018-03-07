@@ -26,7 +26,7 @@ for year in ['2007', '2012']:
     __sets[name] = (lambda split=split, year=year: pascal_voc(split, year))
 
 for split in ['train', 'test']:
-    __sets['science'] = science(split)
+    __sets['science_{}'.format(split)] = (lambda split=split: science(split))
 ## Set up coco_2014_<split>
 #for year in ['2014']:
 #  for split in ['train', 'val', 'minival', 'valminusminival', 'trainval']:

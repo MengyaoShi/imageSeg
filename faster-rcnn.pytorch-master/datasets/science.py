@@ -49,7 +49,7 @@ class science(imdb):
         self._classes = ('__background__',  # always index 0
                          'nuclei')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
-        self._image_ext = '.jpg'
+        self._image_ext = '.png'
         self._image_index = self._load_image_set_index()
         # Default to roidb handler
         # self._roidb_handler = self.selective_search_roidb
@@ -80,7 +80,8 @@ class science(imdb):
         """
         Return the absolute path to image i in the image sequence.
         """
-        return i
+        #return i
+        return self._image_index[i]
 
     def image_path_from_index(self, index):
         """
@@ -93,6 +94,7 @@ class science(imdb):
         assert os.path.exists(image_path), \
             'Path does not exist: {}'.format(image_path)
         return image_path
+    
 
     def _load_image_set_index(self):
         """
@@ -104,6 +106,7 @@ class science(imdb):
         assert os.path.exists(image_set_path), \
             'Path does not exist: {}'.format(image_set_path)
         image_index = os.listdir(image_set_path)
+        image_index.sort()
         return image_index
 
     def _get_default_path(self):
