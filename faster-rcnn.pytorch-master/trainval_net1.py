@@ -155,18 +155,18 @@ if __name__ == '__main__':
   num_workers = 1
   cuda = True
   net = 'vgg16'
-  lr = 1e-3
+  lr = 1e-6
   lr_decay_step = 4
   lr_decay_gamma = 0.1
   class_agnostic = False
   optimizer = "sgd"
-  resume = False
+  resume = True
   checksession = 1
-  checkepoch = 1
-  checkpoint = 1
+  checkepoch = 19
+  checkpoint = 669
   mGPUs = False
-  start_epoch = 1
-  max_epochs = 20
+  start_epoch = 20
+  max_epochs = 40
   disp_interval = 1000
   session = 1
   

@@ -122,6 +122,14 @@ class science(imdb):
         This function loads/saves from/to a cache file to speed up future calls.
         """
         cache_file = os.path.join(self._data_path, 'stage1_train_labels_pickle.txt')
+        if (self._image_set == 'test'):
+            roidb = [None] * len(self._image_index)
+            for ii in range(len(self._image_index)):
+                roidb[ii] = {'boxes': np.zeros([0, 4], dtype=np.uint16), 
+                             'gt_classes': np.zeros([0], dtype=np.int32),
+                             'gt_overlaps':scipy.sparse.csr_matrix(np.zeros([0, 2], dtype=np.float32)),
+                             'flipped': False}
+            return roidb
         assert os.path.exists(cache_file), 'cache file not found at {}'.format(cache_file)
         with open(cache_file, 'rb') as fid:
             roidb = pickle.load(fid)
