@@ -105,7 +105,7 @@ if __name__ == '__main__':
   args.cuda = True
   args.net = 'vgg16'
   args.checksession = 1
-  args.checkepoch = 19
+  args.checkepoch = 39
   args.checkpoint = 669
   args.load_dir = 'save'
   args.vis = True
@@ -140,7 +140,7 @@ if __name__ == '__main__':
   elif args.dataset == "science":
       args.imdb_name = "science_train"
       args.imdbval_name = "science_test"
-      args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
+      args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]']
 
   args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)
 
@@ -213,7 +213,7 @@ if __name__ == '__main__':
     fasterRCNN.cuda()
 
   start = time.time()
-  max_per_image = 100
+  max_per_image = -1
 
   vis = args.vis
 

@@ -208,7 +208,7 @@ if __name__ == '__main__':
     fasterRCNN.cuda()
 
   start = time.time()
-  max_per_image = 100
+  max_per_image = 500
 
   vis = args.vis
 
