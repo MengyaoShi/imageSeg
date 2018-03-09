@@ -1,0 +1,4 @@
+faster-rcnn.pytorch/save/science/*.png
+*/data/*
+*.pyc
+*~
